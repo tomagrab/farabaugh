@@ -1,6 +1,7 @@
 import Carousel from "@/components/UI/Carousel/Carousel";
-import Image from "next/image";
 import Link from "next/link";
+import "../../public/Images/driveway-1.jpg";
+import "../../public/Images/driveway-2.jpg";
 
 export default function Home() {
   return (
