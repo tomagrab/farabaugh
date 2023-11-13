@@ -6,7 +6,12 @@ import driveway3 from "../../public/images/driveway-3.jpg";
 import driveway4 from "../../public/images/driveway-4.jpg";
 
 export default function Home() {
-  const images = [driveway1, driveway2, driveway3, driveway4];
+  const images = [
+    "/Images/driveway-1.jpg",
+    "/Images/driveway-2.jpg",
+    "/Images/driveway-3.jpg",
+    "/Images/driveway-4.jpg",
+  ];
   return (
     <div className="flex flex-col items-center justify-center py-2">
       <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
