@@ -12,6 +12,18 @@ export default function Form() {
 
   return (
     <form>
+      {/* Date input  */}
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Date</span>
+        </label>
+        <input
+          type="date"
+          placeholder="Date"
+          className="input input-bordered"
+          value={new Date().toISOString().split("T")[0]}
+        />
+      </div>
       <div className="form-control">
         <label className="label">
           <span className="label-text">Email</span>
