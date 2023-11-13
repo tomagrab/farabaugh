@@ -21,7 +21,6 @@ export default function Form() {
           type="date"
           placeholder="Date"
           className="input input-bordered"
-          value={new Date().toISOString().split("T")[0]}
         />
       </div>
       <div className="form-control">
