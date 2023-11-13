@@ -13,7 +13,7 @@ export default function Drawer({ children }: DrawerProps) {
         {/* Page content here */}
         <Navbar />
         <div className="grow flex w-full bg-base-100 p-4">
-          <div className="grow bg-base-200 max-h-[calc(100vh-96px)] overflow-y-auto rounded">
+          <div className="grow bg-base-200 max-h-[calc(100vh-6rem)] overflow-y-auto rounded">
             {children}
           </div>
         </div>
