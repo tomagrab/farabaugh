@@ -1,9 +1,5 @@
 import Carousel from "@/components/UI/Carousel/Carousel";
 import Link from "next/link";
-import driveway1 from "../../public/images/driveway-1.jpg";
-import driveway2 from "../../public/images/driveway-2.jpg";
-import driveway3 from "../../public/images/driveway-3.jpg";
-import driveway4 from "../../public/images/driveway-4.jpg";
 
 export default function Home() {
   const images = [
