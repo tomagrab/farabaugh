@@ -18,16 +18,13 @@ export default function Form() {
   // Update state when user data is available
   useEffect(() => {
     if (user) {
-      if (user.firstName) {
-        setFirstName(user.firstName);
-      }
-
-      if (user.lastName) {
-        setLastName(user.lastName);
-      }
-
+      setFirstName(user.firstName || "");
+      setLastName(user.lastName || "");
       setEmail(user.emailAddresses[0].emailAddress);
-      setPhoneNumber(user.phoneNumbers[0].phoneNumber);
+
+      // Check if the user has a phone number and set it, otherwise leave it blank
+      const userPhoneNumber = user.phoneNumbers?.[0]?.phoneNumber;
+      setPhoneNumber(userPhoneNumber || "");
     }
   }, [user]);
 
