@@ -1,6 +1,10 @@
 import Image from "next/image";
 import SidebarItem from "./SidebarItem/SidebarItem";
-import { faCalendar, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendar,
+  faCheckCircle,
+  faHome,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 export default function Sidebar() {
@@ -9,6 +13,7 @@ export default function Sidebar() {
       {/* Sidebar content here */}
       <SidebarItem href={"/"} icon={faHome} />
       <SidebarItem href={"/book"} icon={faCalendar} />
+      <SidebarItem href={"/bookings"} icon={faCheckCircle} />
     </ul>
   );
 }

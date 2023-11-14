@@ -1,17 +1,58 @@
 "use client";
 
+import { createBooking } from "@/actions/actions";
 import { useUser } from "@clerk/nextjs";
+import { FormEvent, useEffect, useState } from "react";
 
 export default function Form() {
   const { user } = useUser();
 
-  const email = user ? user.emailAddresses[0].emailAddress : "";
-  const firstName = user ? user.firstName : "";
-  const lastName = user ? user.lastName : "";
-  const phoneNumber = user ? user.phoneNumbers[0].phoneNumber : "";
+  // Initialize state with default values
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  // Update state when user data is available
+  useEffect(() => {
+    if (user) {
+      if (user.firstName) {
+        setFirstName(user.firstName);
+      }
+
+      if (user.lastName) {
+        setLastName(user.lastName);
+      }
+
+      setEmail(user.emailAddresses[0].emailAddress);
+      setPhoneNumber(user.phoneNumbers[0].phoneNumber);
+    }
+  }, [user]);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    // Create an object with form data
+    const formData = {
+      date,
+      email,
+      firstName,
+      lastName,
+      phoneNumber,
+    };
+
+    // Call the server action to create a booking
+    try {
+      await createBooking(formData);
+      // Handle success - e.g., show a success message, clear form, etc.
+    } catch (error) {
+      // Handle errors - e.g., show an error message
+    }
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {/* Date input  */}
       <div className="form-control">
         <label className="label">
@@ -21,6 +62,8 @@ export default function Form() {
           type="date"
           placeholder="Date"
           className="input input-bordered"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
         />
       </div>
       <div className="form-control">
@@ -32,6 +75,7 @@ export default function Form() {
           placeholder="email"
           className="input input-bordered"
           value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div className="form-control">
@@ -43,6 +87,7 @@ export default function Form() {
           placeholder="First Name"
           className="input input-bordered"
           value={firstName!}
+          onChange={(e) => setFirstName(e.target.value)}
         />
       </div>
       <div className="form-control">
@@ -54,6 +99,7 @@ export default function Form() {
           placeholder="Last Name"
           className="input input-bordered"
           value={lastName!}
+          onChange={(e) => setLastName(e.target.value)}
         />
       </div>
       <div className="form-control">
@@ -65,6 +111,7 @@ export default function Form() {
           placeholder="Phone Number"
           className="input input-bordered"
           value={phoneNumber!}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </div>
 
