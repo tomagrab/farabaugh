@@ -13,6 +13,7 @@ export default function Form() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [notes, setNotes] = useState("");
 
   // Update state when user data is available
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function Form() {
       firstName,
       lastName,
       phoneNumber,
+      notes,
     };
 
     // Call the server action to create a booking
@@ -112,6 +114,17 @@ export default function Form() {
           className="input input-bordered"
           value={phoneNumber!}
           onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Notes</span>
+        </label>
+        <textarea
+          placeholder="Enter any notes here"
+          className="textarea textarea-bordered"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
         />
       </div>
 

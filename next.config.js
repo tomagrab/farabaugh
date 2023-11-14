@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  // Allow images from clerk
+  images: {
+    domains: ["img.clerk.com"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

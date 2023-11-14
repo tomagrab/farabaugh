@@ -9,12 +9,12 @@ type BookingFormData = {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  notes?: string;
 };
 
 export async function createBooking(formData: BookingFormData) {
-  const { date, email, firstName, lastName, phoneNumber } = formData;
+  const { date, email, firstName, lastName, phoneNumber, notes } = formData;
 
-  // Find or create the user based on the email and phone number
   let user = await db.user.findUnique({ where: { email } });
   if (!user) {
     user = await db.user.create({
@@ -26,13 +26,27 @@ export async function createBooking(formData: BookingFormData) {
     });
   }
 
-  // Create a new booking
   return await db.booking.create({
     data: {
       userId: user.id,
       serviceDate: new Date(date),
-      status: "Pending", // or any default status you prefer
-      // Add notes if necessary
+      status: "Pending",
+      notes,
     },
   });
+}
+
+export async function getBooking(email: string) {
+  const user = await db.user.findUnique({
+    where: { email },
+    include: {
+      bookings: true,
+    },
+  });
+
+  if (!user) {
+    return null;
+  }
+
+  return user.bookings;
 }
