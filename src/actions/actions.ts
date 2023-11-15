@@ -2,6 +2,7 @@
 "use server";
 
 import { db } from "@/DB/db";
+import { redirect } from "next/navigation";
 
 type BookingFormData = {
   date: string;
@@ -26,7 +27,7 @@ export async function createBooking(formData: BookingFormData) {
     });
   }
 
-  return await db.booking.create({
+  await db.booking.create({
     data: {
       userId: user.id,
       serviceDate: new Date(date),
@@ -34,6 +35,8 @@ export async function createBooking(formData: BookingFormData) {
       notes,
     },
   });
+
+  redirect(`/bookings`);
 }
 
 export async function getBooking(email: string) {
