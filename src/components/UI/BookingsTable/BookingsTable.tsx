@@ -6,6 +6,7 @@ import { getBooking } from "@/actions/actions";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Modal from "../Modal/Modal";
 
 export default function BookingsTable() {
   const { user } = useUser();
@@ -77,30 +78,7 @@ export default function BookingsTable() {
                   >
                     details
                   </button>
-                  <dialog id={`modal_${index}`} className="modal">
-                    <div className="modal-box">
-                      <h3 className="font-bold text-lg">Hello!</h3>
-                      <p className="py-4">
-                        Name: {user?.fullName}
-                        <br />
-                        Email: {user?.emailAddresses[0].emailAddress}
-                        <br />
-                        Phone: {user?.phoneNumbers?.[0]?.phoneNumber}
-                        <br />
-                        Service Date: {formatDate(booking.serviceDate)}
-                        <br />
-                        Notes: {booking.notes}
-                        <br />
-                        Status: {booking.status}
-                      </p>
-                      <div className="modal-action">
-                        <form method="dialog">
-                          {/* if there is a button in form, it will close the modal */}
-                          <button className="btn">Close</button>
-                        </form>
-                      </div>
-                    </div>
-                  </dialog>
+                  <Modal index={index} booking={booking} user={user!} />
                 </th>
               </tr>
             ))}
